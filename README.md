@@ -4,9 +4,9 @@
 **A.A.**: 2022/2023
 
 ## Descrizione
-Esercitazioni di laboratorio e raccolta di esami del corso.
+Esercitazioni di laboratorio e raccolta di esami del corso svolti in Java, source code in Java e C.
 
-**Obiettivi**: conoscere gli algoritmi e le strutture dati fondamentali ed essere in grado di implementarli in un linguaggio di programmazione avanzato (Java).
+**Obiettivi**: conoscere gli algoritmi e le strutture dati fondamentali ed essere in grado di implementarli in un linguaggio di programmazione avanzato.
 
 ## Università
 - Sapienza Università di Roma
