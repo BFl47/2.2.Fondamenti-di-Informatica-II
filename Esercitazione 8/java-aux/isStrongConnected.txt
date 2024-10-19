@@ -1,0 +1,34 @@
+public static <V> boolean isStrongConnected(Graph.GraphNode<V> n, Graph<V> g) {
+	g.resetStatus();
+	
+	dfs_out(n, g);
+	for (Graph.GraphNode<V> nodo: g.getNodes()) {
+		if (nodo.state == Graph.GraphNode.Status.UNEXPLORED)
+			return false;
+	}
+	
+	dfs_in(n, g);
+	for (Graph.GraphNode<V> nodo: g.getNodes()) {
+		if (nodo.state == Graph.GraphNode.Status.UNEXPLORED)
+			return false;
+	}
+	return true;
+}
+
+public static <V> void dfs_out(Graph.GraphNode<V> n, Graph<V> g) {
+	n.state = Graph.GraphNode.Status.EXPLORED;
+	
+	for (Graph.GraphNode<V> nodo: g.getOutNeighbors(n)) {
+		if (nodo.state == Graph.GraphNode.Status.UNEXPLORED)
+			dfs_out(nodo, g);
+	}
+}
+
+public static <V> void dfs_in(Graph.GraphNode<V> n, Graph<V> g) {
+	n.state = Graph.GraphNode.Status.EXPLORED;
+	
+	for (Graph.GraphNode<V> nodo: g.getInNeighbors(n)) {
+		if (nodo.state == Graph.GraphNode.Status.UNEXPLORED)
+			dfs_in(nodo, g);
+	}
+}

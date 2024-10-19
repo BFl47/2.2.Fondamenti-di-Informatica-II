@@ -1,0 +1,33 @@
+Esercizio 3
+
+trovare la parte intera di log(base2)n con n appartenente a N
+usando solo addizioni/sottrazioni e divisioni intere
+
+int_log(int n) {
+    if (n == 1)
+        return 0;
+    return 1 + int_log(n/2);
+}
+
+T(n) = c + T(n/2)
+T(1) = c'
+
+T(n) = T(n/2) + c = T(n/4) + 2c = T(n/8) + 3c = ... = T(n/2^k) + kc
+
+n/2^k = 1 -> n = 2^k -> k = log(base2)n
+
+T(n) = c' + log(base2)n * c ~ O(nlogn)
+
+
+Esercizio 4
+MinHeap
+n inserimenti con chiavi crescenti
+
+poichè ad ogni inserimento la proprietà dell'heap è automaticamente soddisfatta, 
+cioè key(v) <= key(v.left) and key(v) <= key(v.right), ogni inserimento non richiede l'esecuzione dell'Upheap, avrà quindi costo O(1).
+Per n inserimenti il costo sarà O(n)
+
+n inserimenti con chiavi decrescenti
+
+in questo caso, invece, ad ogni inserimento si dovrà ristabilire la proprietà dell'heap.
+Ogni inserimento costerà O(logn), per n inserimenti il costo sarò O(nlogn)

@@ -1,0 +1,63 @@
+Quesito 2.1
+
+G = (V,E) 
+n vertici, non diretto e completo
+
+DFS
+La dfs esplorerà tutto il grafo da un singolo ramo, andando a creare un albero sbilanciato di h = n-1; infatti, dal primo nodo sarà possibile raggiungere tutti gli altri. Per lo stesso motivo il numero delle foglie sarà pari ad 1.
+Il grado minimo è pari a 1 e il grado massimo è pari a 2
+
+es. con 4 nodi 
+    A 
+    |
+    B
+    |
+    C
+    |
+    D
+
+BFS
+La bfs esplorerà tutto il grafo creando un solo livello aggiungivo oltre a quello iniziale, contentente il nodo di partenza, h = 1 e il numero delle foglie sarà pari a n-1.
+Il grado minimo è pari a 1 e il grado massimo è pari a n-1
+
+es. con 4 nodi
+    A
+  / | \
+ B  C  D
+
+
+Quesito 2.2
+
+Algoritmo isBST(Node v)
+
+Input: T.root, cioè la radice dell'albero binario T
+Output: true se T è un BST, cioè se key(v.left) <= key(v) <= key(v.right); false altrimenti
+
+if (v == null)
+    return
+
+if ((v.left != null AND key(v) < key(v.left) OR (v.right != null AND key(v) > key(v.right))
+    return false
+
+return isBST(v.left) AND is BST(v.right)
+
+
+Quesito 3
+
+Algoritmo trovaDifferenza(Liste l1, l2)
+
+Input: due liste ordinate in modo crescente l1, l2, contenenti rispettivamente n1, n2 stringhe
+Output: una lista ordinata contenente la differenza insiemistica l1\l2, cioè tutti gli elementi contenuti in l1, ma non in l2
+
+inizializza l
+
+for stringa s1 in l1:
+    if (!l2.contains(s1))
+        l.add(s1)
+
+return l
+
+Costo: 
+l2.contains(s) nel peggiore dei casi deve effettuare O(n2) confronti
+inoltre viene eseguito O(n1) volte.
+Quindi il costo asintotico è pari a O(n1*n2)

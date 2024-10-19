@@ -1,0 +1,47 @@
+Esercizio 1
+
+nel caso base abbiamo un costo pari a O(1), poichè sono tutte assegnazioni con costo costante;
+ci sono poi due chiamate ricorsive, ad ogni chiamata l'array si dimezza;
+anche il resto ha costo costante, quindi il costo dipende totalmente dalla ricorsione binaria
+
+T(n) = c + 2T(n/2) 
+T(1) = c'
+
+T(n) = c + 2T(n/2) = c + 2[c + 2T(n/2^2)] = c + 2c + 2^2T(n/2^2) = c + 2c + 2^2[c + 2T(n/2^3) = ... =
+     = c + 2c + 2^(k-1) + 2^k * T(n/2^k) = c * SUM(i=0..k-1) 2^i + 2^k * T(n/2^k)
+
+n/2^k = 1 -> k = log(base 2)n
+SUM(i=0..k-1) 2^i serie geometrica di ragione 2 = [2^k - 1]/ [2-1]
+
+T(n) = c*[2^k -1] + 2^k * T(n/2^k)
+per k = log(base 2)n
+T(n) = cn + n + c' ~ O(n)
+
+
+Esercizio 3
+
+T(n) = c + T(n/2)
+T(1) = c'
+
+T(n) = c + c + T(n/2^2) = c + c + c + T(n/2^3) = ... = kc + T(n/2^k)
+
+n/2^k = 1 -> k = log(base2)n
+
+T(n) = log(base2)n * c + c' ~ O(logn)
+
+
+Esercizio 4
+
+In un minHeap la radice ha il valore più piccolo tra tutti e vale sempre che per un generico nodo v
+key(v) <= key(v.left) and key(v) <= key(v.right)
+
+Perciò con n inserimenti con chiavi crescenti, si inserirà il valore corrente sempre in last node,
+la proprietà dell'heap sarà verificata e non ci sarà bisogno di effettuare un upheap per ristabilirla
+Costo O(n)
+
+Invece se vengono effettuati n inserimenti con chiavi decrescenti, ogni singola volta dovrò essere ristabilita la
+proprietà dell'heap, verranno quindi effettuato n volte l'upheap.
+Una singola esecuzione dell'upheap ha costo O(logn)
+Costo totale O(nlogn)
+
+

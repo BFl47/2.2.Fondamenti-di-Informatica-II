@@ -1,0 +1,29 @@
+Quesito 1
+
+il ciclo for(int i = 3; i <= n; i += 2) viene eseguito (n-3)/2 volte ~ O(n)
+
+il ciclo for(int j = 2*i; j <= n; j += i) viene eseguito al massimo (n-2*i)/i volte ~ O(n)
+se la condizione if(list[i] == 0) è rispettata
+
+Quindi l'istruzione dominante, ad es list[j]++; verrà eseguita O(n^2) volte
+
+La stampa ha costo O(n), come il primo ciclo
+
+Ma n è il valore dell'input e non la dimensione; infatti si ha: 
+z = |n| 
+z = log(base2) n
+n = 2^z
+Quindi il costo totale in funzione di n è O(n) + O(n^2) = O(n^2)
+invece il costo in funzione della dimensione dell'input è O(2^z^2)
+
+
+Quesito 3.3
+
+Per determinare se un grafo sia aciclico o meno, si può effettuare una DFS oppure una BSF.
+Se si usa l'implementazione basata sulle etichette "EXPLORING, UNEXPLORED, EXPLORED", bisogna verificare che il nodo che si sta visitando non stia già in esplorazione con stato EXPLORING; in tal caso il grafo contiene un ciclo.
+
+Entrambi gli algoritmi di esplorazione hanno costo O(n + m), con n = n° di nodi, m = n° di lati;
+infatti, si dovrà etichettare sia i nodi che i lati con costo rispettivamente di O(n) e O(m) e inoltre per ogni vertice si dovranno visitare tutti i lati uscenti SUM deg(v) = 2m.
+Quindi il costo sarà almeno lineare.
+
+ 

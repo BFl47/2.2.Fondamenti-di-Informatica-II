@@ -1,0 +1,44 @@
+Quesito 2.1
+
+La scelta non è ottimale, poichè ogni parola con il prefisso comune avrà lo stesso hashcode
+ad es abcdgatto, abcdcane;
+
+ma anche tutte le parole che hanno come primi 4 caratteri un elemento dell'insieme delle permutazioni avranno lo stesso hashcode
+ad es abcdgatto, dbacgatto;
+
+quindi la scelta di questa funzione aumenta il rischio di collisioni tra chiavi diverse.
+
+
+Quesito 2.2
+
+array dim_0 = 1
+n inserimenti
+- se l'array non è pieno, il generico inserimento ha costo O(1)
+- altrimenti, bisogna ridimensionare da x->3x, copiare il vecchio contenuto e inserire i nuovi elementi
+
+Il numero dei ridimensionamenti sarà massimo log(base3)n
+La dimensione varierà in questo modo: 1 -> 3 -> 9 -> 27 -> ... 
+Quindi il costo sarà 1 + 3 + 3^2 + 3^3 + ... + 3^[log(base3)n] = SUM(i=0...log(base3)n) 3^i = 
+(3^[log(base3)n+1] - 1) / 3-1 ~ O(n)
+
+Il costo ammortizzato è dato da O(n)/n, cioè il costo medio per elemento è O(1)
+
+
+Quesito 3
+
+Algoritmo klista(Lista l)
+
+Input: lista non ordinata contentente n coppie(key, value)
+Output: sottolista ordinata contenente le k coppie con valore più alto, in ordine decrescente
+
+inizializza lista ris
+MaxHeap pq = bottomUp(l)  
+
+for (int i = 0, i < k, i++) 
+    ris.addLast(pq.removeMax())     //per mantenere l'ordinamento decrescente
+
+return ris
+
+Suppongo di avere a disposizione una funzione che data una lista mi restituisce un MaxHeap ottenuto con costruzione BottomUp, quindi con costo O(n)
+Un singolo removeMax costerà O(logn), poichè ad ogni rimozione bisogna ripristinare la proprietà dell'heap;
+verranno inoltre eseguiti k removeMax(), quindi il costo totale sarà O(klogn)

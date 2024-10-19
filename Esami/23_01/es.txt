@@ -1,0 +1,74 @@
+Quesito 2.1
+
+Per il grafo in figura esiste un solo albero minimo ricoprente, 
+poiché ogni lato ha peso diverso dagli altri; infatti, in generale l'MST è unico,
+ma nel caso dovessero essere presenti due lati con lo stesso peso, l'albero minimo coprente
+non sarebbe più unico.
+
+It	T						Arco Aggiunto
+1	-						b-d
+2	b-d						a-d
+3	b-d	a-d					d-e
+4	b-d a-d d-e				c-d
+5 	b-d a-d d-e	c-d			e-f
+6	b-d a-d d-e	c-d	e-f
+
+
+Quesito 2.2
+
+Proprietà BST
+dato v v.key >= v.left.key AND v.key <= v.right.key
+
+Algoritmo isBST(Node v)
+
+Input: radice dell'albero T
+Output: true se T è un BST, false altrimenti
+
+if (v == null)
+	return true
+	
+//verifico che i figli non siano null, ed eventualemente verifico che la 
+//proprietà del BST sia soddisfatta
+if ((v.left != null AND v.left.key > v.key) 		OR
+	(v.right != null AND v.right.key < v.key))
+	return false
+
+//chiamo ricorsivamente la funzione sul figlio sx e sul figlio dx di v
+return isBST(v.left) AND isBST(v.right)
+
+
+Quesito 3
+
+Algoritmo trovaIntersezione(BST T1, BST T2)
+Input: due alberi binari di ricerca T1 e T2
+Output: una lista contenente l'intersezione dei due alberi
+
+inizializzo hashTable hT
+inOrderPrimo(T1.root, hT)
+
+inizializzo lista l
+inOrderSecondo(T2.root, hT, l)
+
+return l
+
+
+Algoritmo inOrderPrimo(Node v, hashTable hT)
+
+if (v == null)
+	return 
+inOrderPrimo(v.left, hT)
+hT.put(v.key)
+inOrderPrimo(v.right, hT)
+
+
+Algoritmo inOrderSecondo(Node v, hashTable hT, lista l)
+
+if (v == null)
+	return 
+inOrderSecondo(v.left, hT, l)
+
+//verifico se chiave già presente nell'hashTable, eventualmente aggiungo in lista
+if (hT.get(v.key) != null)
+	l.add(v.key)
+
+inOrderSecondo(v.right, hT, l)

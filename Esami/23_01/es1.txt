@@ -1,0 +1,77 @@
+Quesito 2.1
+
+Per il grafo in figura esiste un unico MST, poichè ogni arco ha peso diverso da tutti gli altri; infatti, l'unico caso in cui è possibile ottenere più di un albero minimo coprente è quando un lato (tra quelli a peso minimo, che quindi verrà incluso nell'albero) ha peso uguale ad un altro lato.
+
+It    ArcoAggiunto       T
+1       b-d (p = 3)
+2       d-a (p = 5)     b-d
+3       d-e (p = 6)     b-d, d-a
+4       c-d (p = 7)     b-d, d-a, d-e
+5       e-f (p = 8)     b-d, d-a, d-e, c-d
+
+MTS T = b-d, d-a, d-e, c-d, e-f
+peso totale = 29
+
+
+Quesito 2.2
+
+Algoritmo isHeap(Nodo v)
+
+Input: T.root, cioè la radice dell'albero binario
+Output: true se l'albero binario è un heap, cioè se key(v) <= key(v.left) and key(v) <= key(v.right)
+
+if (v == null)
+    return true
+
+if ((v.left != null AND key(v) > key(v.left))  OR  (v.right != null AND key(v) > key(v.right))
+    return false
+
+return isHeap(v.left) AND isHeap(v.right)
+
+
+Quesito 3
+
+Algoritmo intersezione(BST T1, BST T2)
+
+Input: due BST T1, T2 a chiavi intere, rispettivamente con n1 e n2 chiavi
+Output: una lista ordinata contenente l'intersezione tra T1 e T2
+
+inizializza lista l
+inizializza hashTable ht
+
+inOrderPrimo(T1.root, ht)
+
+inOrderSecondo(T2.root, ht, l)
+
+return l
+
+
+Algoritmo inOrderPrimo(Nodo v, HashTable ht)                //O(n1)
+
+if (v == null)
+    return
+
+inOrderPrimo(v.left, ht)
+ht.put(v.key)
+inOrderPrimo(v.right, ht)
+
+
+Algoritmo inOrderSecondo(Nodo v, HashTable ht, Lista l)     //O(n2)
+
+if (v == null)
+    return 
+
+inOrderSecondo(v.left, ht, l)
+
+int chiave = ht.get(v.key)
+if (chiave != null)                     //controllo che v.key sia una chiave nell'hashTable (cioè v è contenuto in T1)
+    l.add(chiave)                       //se v.key non dovesse essere una chiave ht.get resituisce null
+
+inOrderSecondo(v.right, ht, l)
+
+
+Poichè le due visite hanno costo O(n1) e O(n2), il costo totale è O(n1+n2)
+
+
+
+

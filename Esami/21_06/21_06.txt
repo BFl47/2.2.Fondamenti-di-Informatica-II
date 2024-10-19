@@ -1,0 +1,92 @@
+Quesito 1
+
+LinkedList ordina(BST t) {
+	LinkedList l = new LinkedList();
+	inOrder(t.root, l);
+	
+	return l;
+		
+}
+
+void inOrder(Node n, LinkedList l) {
+	if (n == null)
+		return;
+	inOrder(n.right, l);
+	l.add(n.key);
+	inOrder(n.left, l);
+}
+
+
+Quesito 2.1
+
+N = 13
+scansione lineare, h(k) = k % N
+(quando c'è una collisione, scorro finchè non trovo uno spazio libero)
+
+		 0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |  10  |  11  |  12
+10 		    |	  | 	|	  |									     10
+26		26	|	  |		|	  |										 10
+52		26	|  52 |		|	  |									     10					collisione (52 % 13 = 0)
+76		26  |  52 |		|	  |							 76			 10	
+13		26	|  52 |  13	|	  |  						 76			 10					collisione (13 % 13 = 0)
+8       26  |  52 |  13	|	  |							 76   8		 10					collisione (8 % 13 = 8)
+3		26  |  52 |  13	|  3  |						     76	  8		 10
+33		26  |  52 |  13	|  3  |					  33	 76	  8		 10
+60		26  |  52 |  13	|  3  |					  33	 76	  8		 10		60			collisione (60 % 13 = 8)
+42		26  |  52 |  13	|  3  |	42				  33     76	  8		 10		60			collisione (42 % 13 = 3)
+
+Quesito 2.2
+
+dim iniziale = k
+n inserimenti
+se array non pieno -> inserimento costo O(1)
+se array pieno -> ridimensionamento da x a x+k e copia 
+
+k -> k+k = 2k -> 2k+k = 3k -> ...
+n° ridimensionamenti = n/k
+
+Quando l'array è pieno bisogna quindi ridimensionare e copiare tutti gli elementi, quindi il costo sarà:
+k + 2k + 3k + 4k + ... = SUM(i = 0..n/k) i = [n(n+1)]/2 ~ O(n^2)
+
+in conclusione il costo asintotico è O(n^2)
+
+
+Quesito 3
+
+Nodi: n località
+Insieme degli archi: collegamenti tra le località
+Pesi degli archi: distanza chilomentrica tra le località
+
+Grafo pesato, connesso, non orientato
+
+Algoritmo backbone
+Input: grafo G definito nei dati
+Output: MST, albero minimo coprente, cioè ogni località è raggiungibile e la somma dei pesi dei lati è minima
+
+for ogni nodo v di G
+    cluster C(v) = makeSet(v)
+
+//generica entry = (peso, lato), pq conterrà tutti i lati 
+inizializza priorityQueue pq 
+
+for ogni lato e di G
+    pq.insert(peso(e), e)
+
+inizializza albero T
+
+n = n° di vertici
+while T.size < n-1 lati
+    (u, v) = pq.removeMin()
+    C(u) = find(u) //cluster a cui appartiene u
+    C(v) = find(v) //cluster a cui appartiene v
+    if (C(u) != C(v))
+        T.add(u, v)
+        union(C(u), C(v))
+return T
+
+Ho a disposizione:
+makeset(v) -> crea un cluster con un singolo elemento n
+find(v) -> trova il cluster a cui appartiene n
+union(A, B) -> unisce i cluster A, B
+
+                    

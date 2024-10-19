@@ -1,0 +1,34 @@
+Quesito 1
+
+Cerco l'istruzione dominante all'interno del doppio ciclo
+il primo ciclo: for(int i = 3; i <= n; i += 2) verrà eseguito n-3 volte, cioè circa n;
+il secondo ciclo: for(int j = 2*i; j <= n; j += i) verrà eseguito n-(2*i) volte, cioè circa n;
+l'istruzione list[j]++ ha costo costante, poichè elementare e 
+verrà eseguita O(n*n) volte, cioè O(n^2)
+
+Il costo asintotico è O(n^2)
+
+
+Quesito 3.3
+
+Per determinare se vi è un ciclo all'interno di un grafo, si può utilizzare una bfs oppure
+una dfs, in entrambi i casi il loro costo è O(n + m)
+con n = n° di nodi e m = n° di archi
+Il costo costante non è raggiungibile, dovrà essere almeno lineare, e se il numero di archi
+è piuttosto ingente, in realtà il costo sarò O(n^2), poichè il numero di archi sarà proporzionale
+a n^2.
+
+
+Quesito 4
+
+Per il grafo in figura 2 esiste un unico MST, poiché ogni lato ha peso diverso dagli altri;
+infatti, un grafo ammette un MST non unico, se ci sono lati con lo stesso peso, quindi 
+sarà indifferente quale dei due lati verrà scelto.
+
+IT		T						Arco aggiunto
+1		-						b-d
+2		b-d						a-d
+3		b-d a-d					d-e
+4		b-d a-d d-e				c-d
+5		b-d a-d d-e c-d			e-f
+6		b-d a-d d-e c-d	e-f

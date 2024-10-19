@@ -1,0 +1,59 @@
+Quesito 2.1
+
+La DFS potrà visitare ogni nodo partendo dal nodo sorgente.
+Si genererà un albero estremamente sbilanciato, con altezza h = n-1, 
+con n numero di nodi del grafo;
+f = 1, poichè solo il nodo visitato per ultimo sarà una foglia;
+il max e min gr(v) (con v generico nodo) è uguale a 1, 
+proprio a causa della struttura dell'albero.
+
+La BFS visiterà tutti i nodi vicini al nodo sorgente in un unico livello.
+Si genererà un albero molto schiacciato, con h = 1;
+f = n-1, poichè tutti i nodi esclusa la sorgente sono foglie;
+il max gr(v) = n-1 e il min gr(v) = 1.
+
+
+Quesito 2.2
+
+Proprietà dell'heap(min)
+v.key < v.figlio.key
+
+Algoritmo isHeap(Node v) 
+
+Input: radice dell'albero binario T
+Output: booleano che indica se l'albero è un heap oppure no
+
+if (v == null)
+	return true
+	
+//controllo che i figli non siano null ed eventualmente che la proprietà
+//dell'heap sia rispettata
+if ((v.right != null AND v.right.key < v.key)	OR
+	(v.left != null AND v.right.key < v.key))
+	return false
+	
+//chiamo ricorsivamente la funzione sul entrambi i figli
+return isHeap(v.left) AND isHeap(v.right)
+
+
+Quesito 3
+
+Algoritmo trovaDifferenza(Lista l1, Lista l2)
+
+Input: due liste ordinate in modo crescente, con rispettivamente
+	n1 elementi e n2 elementi
+Output: una lista ordinata che contiene l1\l2
+
+inizializzo l
+for (stringa s in l1) 
+	if (s not in l2)
+		l.add(s)
+return l
+
+Costo
+Per ogni stringa s in l1 viene verificato se l2 contiene s. 
+l2.contains(s) ha costo O(n2) e verrà quindi eseguito n1 volte.
+Quindi il costo è O(n1 * n2)
+	
+
+

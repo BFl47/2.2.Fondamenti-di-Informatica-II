@@ -1,0 +1,92 @@
+Quesito 1
+
+LinkedList ordina(BST t) {
+    LinkedList ris = new LinkedList();
+    inOrderDx(t.root, ris);
+    return ris;
+}
+
+void inOrderDx(Node<V> v, LinkedList ris) {
+    if (v == null)
+        return
+    inOrderDx(v.right, ris);
+    ris.add(v.key);    
+    inOrderDx(v.left, ris);
+
+}
+
+Quesito 2.1
+
+hashTable N = 13
+gestione delle collisioni con scansione lineare
+funzione hash h(k) = k % N
+    |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |  10 |  11 |  11 | 12 |
+10  |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  10 |  -  |  -  | -  |
+26  |  26 |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  10 |  -  |  -  | -  |
+52  |  26 |  52 |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  10 |  -  |  -  | -  | collisione (52%13=0) scorre 1 elem
+76  |  26 |  52 |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  10 |  76 |  -  | -  |
+13  |  26 |  52 |  13 |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  10 |  76 |  -  | -  | collisione (13%13=0) scorre 2 elem
+8   |  26 |  52 |  13 |  -  |  -  |  -  |  -  |  -  |  8  |  -  |  10 |  76 |  -  | -  |
+3   |  26 |  52 |  13 |  3  |  -  |  -  |  -  |  -  |  8  |  -  |  10 |  76 |  -  | -  |
+33  |  26 |  52 |  13 |  3  |  -  |  -  |  -  |  33 |  8  |  -  |  10 |  76 |  -  | -  |
+60  |  26 |  52 |  13 |  3  |  -  |  -  |  -  |  33 |  8  |  60 |  10 |  76 |  -  | -  | collisione (60%13=8) scorre 1 elem
+42  |  26 |  52 |  13 |  3  |  42 |  -  |  -  |  33 |  8  |  60 |  10 |  76 |  -  | -  | collisione (42%13=3) scorre 1 elem
+
+
+Quesito 2.2
+
+array dim_0 = k
+n inserimenti
+- se array non pieno, il generico inserimento ha costo costante
+- altrimenti, bisogna ridimensionare l'array (x -> x+k), copiare tutto il vecchio contenuto e inserire i nuovi elementi
+
+La dimensione varierà in questo modo: k-> 2k -> 3k -> ... per un massimo di n/k ridimensionamenti
+Il costo quindi sarà: k + 2k + 3k + ... = k * SUM(i=0...n/k) i = k * [(n/k)(n/k + 1)]/2 ~ O(n^2)
+
+
+Quesito 3
+
+Grafo G: 
+- i nodi rappresentano le località;
+- l'insieme degli archi rappresentano i collegamenti tra le varie località; 
+- i pesi degli archi il costo per collegare le località ed esso sarà direttamente proporzionale alla distanza.
+Il grafo è semplice, connesso e non orientato.
+
+Input: grafo G descritto sopra
+Output: MST, cioè l'albero coprente minimo del grafo G
+
+
+
+Algoritmo di Kruskal
+
+inizializza Partition P
+inizializza albero T
+inizializza priority queue pq, ad esempio, MinHeap, le cui entry saranno coppie (chiave = peso del lato, valore =  lato)
+
+for ogni lato l in G
+    pq.insert(l.peso, l)
+
+for ogni nodo n in G
+    Cluster c = P.makeSet(nodo)
+    
+while (!pq.isEmpty()) {
+    Lato l = pq.removeMin().getValue();     //l = (a,b)
+    Nodo a = l.getSource();
+    Nodo b = l.getTarget();
+    
+    if (P.find(a) != P.find(b))
+        T.add(l)
+        P.union(a, b);          //si sottointende che union agisce sui cluster a cui appartengono a e b
+}
+return T
+    
+
+L'ADT partition avrà a disposizione i metodi:
+makeSet(n)  -> restituisce un cluster formato da un unico nodo n
+find(n)     -> trova il cluster a cui appartiene n
+union(a, b) -> unisce due cluster in un singolo cluster
+
+
+
+
+

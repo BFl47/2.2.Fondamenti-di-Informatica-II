@@ -1,0 +1,56 @@
+Quesito 2.1
+
+La scelta effettuata per l'hash function è decisamente poco efficiente, 
+poichè aumenta la possibilità di collisioni, infatti non solo stringhe con un prefisso
+comune collideranno (ad es. "abcdgatto", "abcdcane"), ma poichè viene effettuata la somma,
+anche tutte le stringhe con diverse permutazioni dello stesso prefisso colladeranno
+(ad es. "abcdgatto", "acdbcose").
+
+
+Quesito 2.2
+
+All'inizio dim = 1
+avrò n inserimenti
+se array non pieno -> costo singolo inserimento O(1)
+se array pieno -> ridimensionamento da dim = x a dim = 3x
+				  e copia degli elementi
+				  (costo singola copia = O(1)
+La dimensione dell'array cambierà in questo modo:
+1	3	9	27	...		3^i
+
+Ogni volta che l'array verrà ridimensionato dovranno essere copiati x elem, 
+con x = dim vecchia, con costo pari a x
+
+Quindi il costo sarà dato da:
+1 + 3 + 9 + 27 + ... + 3^i = SUM(i=0..log(base 3)n) 3^i = [3^log(base 3) (n+1) - 1]/[3 - 1]
+
+Asintoticamente O(n)
+
+
+Costo ammortizzato per elemento = O(n)/n = O(1)
+
+
+Quesito 3
+
+Algoritmo sottolistaOrdinata(Lista l, intero k)
+Input: lista l non ordiata contenenti n coppie(key, e) e k intero
+Output: sottolista ordinata in ordine decrescente contenente le k coppie con valore più alto
+
+maxHeap maxh = costruzioneBottomUp(l)
+
+//effettuo k removeMax e k inserimenti in lista -> O(k * log(n))
+for i = 0 to k
+	entry e = maxh.removeMax()
+	//aggiungo per ultimo l'elemento in lista, in modo da mantenere 
+	//un ordine decrescente, inserendo l'elemento più grande per primo
+	l.addLast(e)
+	
+
+Algoritmo costruzioneBottomUp(Lista l)
+Input: lista l
+Output: maxHeap
+
+Costo = O(n)														
+
+
+Costo totale = O(n) + O(k * log(n))
